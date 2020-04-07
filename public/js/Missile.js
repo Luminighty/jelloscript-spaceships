@@ -5,6 +5,7 @@ import BoxCollider from "./engine/BoxCollider";
 import { colliderTags } from "./Config";
 import { ParticleSystem, Particle } from "./engine/ParticleSystem";
 import Explosion from "./Explosion";
+import * as Utils from './engine/Utils';
 
 
 export default class Missile extends GameObject {
@@ -25,18 +26,19 @@ export default class Missile extends GameObject {
 		
 		this.destroy(this.lifeTime);
 		this.addComponent(new BoxCollider(colliderTags.playerMissile, [5, 8], [0,0], true));
+		if (!Utils.mobileAndTabletCheck()) {
+			let particle = new Particle({
+				velocity: () => {return new Vector2(Math.random() - 0.5, Math.random() + 4); },
+				sprite: sprites.particles,
+				spriteRect: sprites.particles.getSpriteFromLabel(`MISSILE_${label}`, 0, 0),
+				spriteAlpha: (life) => {return 1-life;}
+			});
 
-		let particle = new Particle({
-			velocity: () => {return new Vector2(Math.random() - 0.5, Math.random() + 4); },
-			sprite: sprites.particles,
-			spriteRect: sprites.particles.getSpriteFromLabel(`MISSILE_${label}`, 0, 0),
-			spriteAlpha: (life) => {return 1-life;}
-		});
-
-		this.addComponent(new ParticleSystem({
-			particles: [particle],
-			delay: 5,
-		}, true));
+			this.addComponent(new ParticleSystem({
+				particles: [particle],
+				delay: 5,
+			}, true));
+		}
 	}
 
 	get lifeTime() {return 150;}
@@ -55,7 +57,7 @@ export default class Missile extends GameObject {
 			other.gameObject.hit(this.damage);
 			sounds.SOUND.explosions.normal.playOnce();
 			this.destroy();
-			GameObject.init(new Explosion(this.position, Math.random() + 1));
+			GameObject.init(new Explosion(this.position, 1));
 		}
 	}
 

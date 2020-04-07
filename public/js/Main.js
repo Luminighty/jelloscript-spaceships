@@ -156,6 +156,7 @@ NetworkManager.onLobbiesRefreshed((lobbylist) => {
 document.querySelector("#local").addEventListener("click", (e) => {
 	isInLobby = true;
 	menu.style.display = "none";
+	couchModeElement.style.display = "none";
 	startText.innerText = "Press button A to start!";
 	startText.style.display = "block";
 });

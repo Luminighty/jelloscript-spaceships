@@ -122,7 +122,8 @@ export default class Player extends Ship {
 
 	onDeath() {
 		super.onDeath();
-		GameObject.init(new Explosion(this.position, 25));
+		const explosionSize = Utils.mobileAndTabletCheck() ? 5 : 15;
+		GameObject.init(new Explosion(this.position, explosionSize));
 		sounds.SOUND.explosions.big.playOnce();
 	}
 

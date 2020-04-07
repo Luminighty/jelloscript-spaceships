@@ -8,6 +8,7 @@ import BoxCollider from "./engine/BoxCollider";
 import { colliderTags } from "./Config";
 import Explosion from "./Explosion";
 import NetworkManager from "./engine/Networking";
+import * as Utils from "./engine/Utils";
 
 /** @public */
 export default class Enemy extends Ship {
@@ -51,7 +52,8 @@ export default class Enemy extends Ship {
 	}
 
 	onDeath() {
-		GameObject.init(new Explosion(this.position, 20));
+		const explosionSize = Utils.mobileAndTabletCheck() ? 3 : 10;
+		GameObject.init(new Explosion(this.position, explosionSize));
 		sounds.SOUND.explosions.big.playOnce();
 		this.destroy();
 	}
