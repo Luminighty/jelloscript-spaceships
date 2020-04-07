@@ -1,0 +1,4 @@
+{
+	"typescript.preferences.importModuleSpecifier": "auto",
+	"typescript.suggest.autoImports": true,
+}

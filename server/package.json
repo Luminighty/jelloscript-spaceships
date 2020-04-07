@@ -1,0 +1,17 @@
+{
+  "name": "jello-server",
+  "version": "0.8.0",
+  "description": "The node server for the multiplayer part of JelloScript",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luminight",
+  "license": "ISC"
+}

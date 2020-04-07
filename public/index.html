@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="manifest" href="./manifest.json">
+	<meta name="theme-color" content="#000030"/>
+	<link rel="apple-touch-icon" href="media/icons/icons-192.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jellostyles.css">
+	<link rel="icon" sizes="16x16 32x32 64x64" href="/favicon.ico">
+    <title></title>
+</head>
+<body>
+	
+	
+	<canvas id="mainCanvas"></canvas>
+	<div id="UIContainer">
+	</div>
+	<!--script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script-->
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script> window.io = io; </script>
+	<script type="module" src="./js/Main.js"></script>
+	<script src="install.js"></script>
+</body>
+</html>

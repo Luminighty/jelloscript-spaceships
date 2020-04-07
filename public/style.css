@@ -1,0 +1,108 @@
+html {
+	color: white;
+
+}
+
+.button {
+	text-align: center;
+	background-color: rgba(80, 80, 80, 0.3);
+	font-size: 1.5em;
+	font-weight: bold;
+	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+.button:hover {
+	background-color: rgba(80, 80, 80, 0.6);
+}
+
+.middle {
+	position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translateX(-50%);
+    width: 60%;
+	z-index: 20;
+}
+
+#menu * {
+	padding: 10px;
+	text-align: center;
+}
+
+#startText {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%);
+	font-size: 2.5vw;
+	animation-name: start_anim;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-fill-mode: both;
+	animation-timing-function: ease;
+}
+
+#lobbies {
+    max-height: 50vh;
+	display: none;
+}
+
+#lobbies::-webkit-scrollbar {
+	display: none;
+}
+
+.lobby {
+	padding: 15px 20px;
+}
+
+
+#toMenu {
+    padding: 20px;
+    background-color: rgba(139, 0, 0, 0.3);
+    color: white;
+	cursor: pointer;
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: bold;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+#toMenu:hover {
+    background-color: rgba(139, 0, 0, 0.6);
+}
+
+#couchMode {
+	padding: 15px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border-radius: 5px;
+	display: none;
+}
+
+.on {    
+	background-color: rgba(0, 139, 19, 0.3);
+}
+.on:hover {    
+    background-color: rgba(0, 139, 7, 0.6);
+}
+
+#health * {
+	margin-bottom: 40px;
+}
+
+@keyframes start_anim {
+	from {
+		opacity: 1;
+		font-size: 2.5vw
+	}
+	to {
+		opacity: 0.7;
+		font-size: 2vw;
+	}
+}

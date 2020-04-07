@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object Editor</title>
+</head>
+<body>
+    <input type="text" name="objectName" id="objectName">
+    <input type="text" name="extends" id="extends" value="GameObject">
+
+    <button id="generateButton" type="button">Generate</button>
+    <div id="output"></div>
+</body>
+<script>
+
+    let object = {
+        name: 'abc',
+        extends: 'GameObject',
+        components: [],
+        constructor: [],
+        variables: {
+            private: [],
+            public: []
+        }
+    }
+
+    function $(query) { return document.querySelector(query); }
+    $("#generateButton").addEventListener("click", (e) => {
+        $("#output").innerText = output();
+    });
+
+
+    function output() {
+        return `
+import GameObject from './engine/GameObject';
+import {sprites} from './engine/Sprites';
+
+export default class ${object.name} extends ${object.extends} {
+    constructor() {
+        super();
+    
+    }
+
+    update(tick) {
+        // Code here
+    }
+}     
+`
+    }
+
+
+</script>
+</html>
