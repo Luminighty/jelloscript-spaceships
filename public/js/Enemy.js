@@ -75,7 +75,7 @@ export class Spawner extends GameObject {
 		this.hidden = true;
 		this.currentDelay = this.delay;
 		this.host = true;
-		NetworkManager.onMessage("spawnEnemy", this.onSpawn);
+		NetworkManager.onMessage("spawnEnemy", (data) => {this.onSpawn(data);});
 	}
 
 	onSpawn(data) {
@@ -99,7 +99,7 @@ export class Spawner extends GameObject {
 	}
 
 	get position() {
-		return Vector2.right.multiply(Math.random() * 580 + 30);
+		return new Vector2(Math.random() * 580 + 30, -10);
 	}
 
 	get delay() {

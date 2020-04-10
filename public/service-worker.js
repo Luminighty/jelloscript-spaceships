@@ -72,6 +72,10 @@ self.addEventListener('install', (event) => {
 
 
 self.addEventListener("fetch", (event) => {
+	if (event.request.method == "POST") {
+		console.warn(`POST not supported!`, event.request);
+		return;
+	}
 
 	event.respondWith(
 		caches.match(event.request)

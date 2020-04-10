@@ -61,13 +61,23 @@ function onNewController(input, id) {
 	});
 
 	Input.OnSetControllerState(id, (data) => {
+		console.log(data);
 		if (data) {
 			player.localPosition = data.position;
 			player.label = data.color;
 			health.value = data.health;
 		}
 	});
+	
+	Input.OnControllerRemoved(id, () => {
+		player.clearThrusters();
+		player.onDeath();
+		health.remove();
+		console.log("Player removed!");
+	});
+	
 	input.Buttons.A.onPressed(StartGame);
+
 
 	GameObject.init(player, 10);
 }
@@ -85,13 +95,15 @@ function StartGame() {
 		return;
 	isStarted = true;
 	startText.remove();
-	spawner.enabled = !couchMode;
+	spawner.enabled = true;
 	sounds.MUSIC.bgm.play();
 	NetworkManager.sendMessage("start game");
 }
 
 NetworkManager.onMessage("start game", () => {
 	startText.style.display = "none";
+	spawner.enabled = !couchMode;
+	spawner.host = isHost;
 	checkCouchMode();
 });
 
@@ -121,9 +133,10 @@ NetworkManager.setStateGetter(() => {
 });
 
 
-NetworkManager.setStateSetter((data) => {
-	console.log(data);
-	startText.style.display = (data.isStarted) ? "none" : "block";
+NetworkManager.setStateSetter(({isStarted}) => {
+	startText.style.display = (isStarted) ? "none" : "block";
+	spawner.enabled = isStarted;
+	spawner.host = false;
 });
 
 
@@ -144,6 +157,7 @@ NetworkManager.onLobbiesRefreshed((lobbylist) => {
 			lobbies.style.display = "none";
 			startText.innerText = "Waiting for host...";
 			startText.style.display = "block";
+			couchModeElement.style.display = "none";
 			isHost = false;
 			checkCouchMode();
 		});

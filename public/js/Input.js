@@ -138,4 +138,4 @@ export const networkConfig = {
 
 
 // Re-exporting for easier access
-export {Mouse, FromPlayer, OnNewControllerListener, OnGetControllerState, OnSetControllerState} from "./engine/Controller";
+export {Mouse, FromPlayer, OnNewControllerListener, OnGetControllerState, OnSetControllerState, OnControllerRemoved} from "./engine/Controller";

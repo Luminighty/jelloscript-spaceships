@@ -660,6 +660,10 @@ export function OnNewControllerListener(listener) {
  */
 
 /**
+ * @callback ControllerRemovedCallback
+ */
+
+/**
  * Called when setting the state for a controller
  * @param {string} id Controller Id
  * @param {ControllerStateSetter} callback 
@@ -677,6 +681,15 @@ export function OnGetControllerState(id, callback) {
 	controllers[id].stateGetter = callback;
 }
 
+/**
+ * Called when the controller is removed from the network
+ * @param {string} id Controller Id
+ * @param {ControllerRemovedCallback} callback 
+ */
+export function OnControllerRemoved(id, callback) {
+	controllers[id].removeController = callback;
+}
+
 /** Calls the Controller Getter and returns the results */
 export function GetControllerState(id) {
 	const contr = controllers[id];
@@ -691,6 +704,7 @@ export function SetControllerState(id, data) {
 	if (contr && contr.stateSetter)
 		contr.stateSetter(data);
 }
+
 
 /**
  * Calls Controller.update() on every attached controller

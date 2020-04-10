@@ -12,7 +12,7 @@ import Explosion from './Explosion';
 import Slider from './Slider';
 
 export default class Player extends Ship {
-	constructor(input, label, healthSlider, x=120, y=120) {
+	constructor(input, label, healthSlider, x=310, y=280) {
 		super(sprites.playership, (label) ? label : Utils.decide([1,1,1], ["PURPLE", "GREEN", "BLUE"]));
 
 		/** @type {Vector2} */
@@ -122,6 +122,7 @@ export default class Player extends Ship {
 
 	onDeath() {
 		super.onDeath();
+		this.clearThrusters();
 		const explosionSize = Utils.mobileAndTabletCheck() ? 5 : 15;
 		GameObject.init(new Explosion(this.position, explosionSize));
 		sounds.SOUND.explosions.big.playOnce();

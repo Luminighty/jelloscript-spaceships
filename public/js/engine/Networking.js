@@ -94,7 +94,7 @@ if (typeof window.io !== 'undefined') {
 	 * A remote player representation for a controller
 	 */
 	class NetworkController extends Controller {
-		constructor(buttons, axes, type, id, data) {
+		constructor(buttons, axes, type, id) {
 			super(buttons, axes, false);
 			this.networkId = id;
 			NetworkController.networkToIdMap[this.networkId] = this.id;
@@ -129,6 +129,13 @@ if (typeof window.io !== 'undefined') {
 					input[key].callListener(listenerType);
 				}
 				input[key].state = value;
+			});
+
+			socket.on("remove controller", (id) => {
+				if (id != this.networkId)
+					return;
+				if (this.removeController)
+					this.removeController();
 			});
 		}
 
@@ -255,7 +262,7 @@ if (typeof window.io !== 'undefined') {
 	});
 
 	socket.on("new controller", (buttons, axes, type, id, data) => {
-		new NetworkController(buttons, axes, type, id, data);
+		new NetworkController(buttons, axes, type, id);
 		SetControllerState(NetworkController.networkToIdMap[id], data);
 	});
 
