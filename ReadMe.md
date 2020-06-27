@@ -7,6 +7,7 @@ This is a small example game made using JelloScript.
 To play it, you'll have to start the node server found in the `server/` folder.
 
 ```
+npm install
 node server/index.js 
 ```
 
